@@ -19,8 +19,5 @@ action :run do
     mode '0640'
   end
 
-  # Reload consul
-  execute "reload consul" do
-    command "#{new_resource.consul_bin} reload"
-  end
+  notifies :reload, 'service[consul]', :delayed
 end
