@@ -17,7 +17,7 @@ action :run do
     owner new_resource.user
     group new_resource.group
     mode '0640'
-    notifies :reload, 'systemd_unit[consul]', :delayed
+    notifies :reload, 'systemd_unit[consul.service]', :delayed
   end
 
 end
