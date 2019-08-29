@@ -17,7 +17,10 @@ action :run do
     owner new_resource.user
     group new_resource.group
     mode '0640'
-    notifies :reload, 'systemd_unit[consul.service]', :delayed
   end
 
+  execute "reload consul" do
+    only_if { ::File.exist?('/etc/systemd/system/consul.service') }
+    command "#{new_resource.consul_bin} reload"
+  end
 end
